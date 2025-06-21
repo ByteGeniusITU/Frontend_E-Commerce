@@ -34,6 +34,7 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
 
     - name: Pull infra repository
+      if: ${{ ! contains(github.ref_name, 'production') }}
       uses: actions/checkout@v4
       with:
         repository: '${{ secrets.REPO_INFRA_URL }}'
@@ -41,6 +42,7 @@ jobs:
         token: ${{ secrets.REPO_INFRA_ACCESS_TOKEN }}
 
     - name: Modify manifests
+      if: ${{ ! contains(github.ref_name, 'production') }}
       run: |
           git config user.name "Github actions bot"
           git config user.email "<>"
@@ -48,6 +50,7 @@ jobs:
           sed -i -r 's/v[0-9]+.[0-9]+-(staging|production)/${{github.ref_name}}/g' ./overlays/$BRANCH/deployment_patch.yaml
 
     - name: Commit and push changes
+      if: ${{ ! contains(github.ref_name, 'production') }}
       run: |
           git add .
           git commit -m "Updated manifests"

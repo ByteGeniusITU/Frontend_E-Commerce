@@ -2,7 +2,8 @@ name: React CD
 
 on:
   push:
-    branches: [production]
+    tags:
+      - 'v[0-9]+.[0-9]+-production'
 
 jobs:
   deploy:

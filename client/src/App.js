@@ -10,11 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main/>} />
-<<<<<<< HEAD
         <Route path="/plans" element={<Plans />}/>
-=======
         <Route path="/panel/:id" element={<Panel/>} />
->>>>>>> main
       </Routes>
     </BrowserRouter>
   );

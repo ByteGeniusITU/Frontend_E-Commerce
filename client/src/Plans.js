@@ -4,8 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './Plans.css';
 import axios from 'axios';
-
-const BACKEND_HOSTING_URL = ``;
+import {BACKEND_HOSTING_URL, BACKEND_ECOMMERCE_URL} from './Services/constants.js';
 
 const Plans = () => {
     const navigate = useNavigate();
@@ -33,7 +32,7 @@ const Plans = () => {
         const fetchRamOptions = async () => {
             try {
                 setLoadingRam(true);
-                const response = await fetch('https://api.example.com/ram-options');
+                const response = await fetch(`${BACKEND_ECOMMERCE_URL}/ram-options`);
                 const data = await response.json();
 
                 if (data && data.resources && Array.isArray(data.resources)) {
@@ -68,7 +67,7 @@ const Plans = () => {
         const fetchCpuOptions = async () => {
             try {
                 setLoadingCpu(true);
-                const response = await fetch('https://api.example.com/cpu-options');
+                const response = await fetch(`${BACKEND_ECOMMERCE_URL}/cpu-options`);
                 const data = await response.json();
 
                 if (data && data.resources && Array.isArray(data.resources)) {
@@ -116,8 +115,8 @@ const Plans = () => {
     const handleRequest = (e) => {
         if(!serverName) return alert("Debe de ingresar un nombre del servidor")
 
-        let cpu = console.log(selectedCpuPlan.split("-")[1])
-        let ram = console.log(selectedRamPlan.split("-")[1].substring(0,1))
+        let cpu = selectedCpuPlan.split("-")[1]
+        let ram = selectedRamPlan.split("-")[1].substring(0,1)
 
         axios.post(`${BACKEND_HOSTING_URL}/server`, {
             id: serverName,
@@ -125,7 +124,7 @@ const Plans = () => {
             ram: Number(ram)
         }).then(response => {
             console.log(response.data)
-            navigate(`/dashboard/${serverName}`)
+            navigate(`/panel/${serverName}`)
         }).catch(error => {
             console.log(error)
             alert("Ocurrió un error al crear el servidor")

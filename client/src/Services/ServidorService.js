@@ -1,7 +1,7 @@
-import { URL, SERVER_ID } from './constants';
+import { BACKEND_HOSTING_URL} from './constants';
 
 export const iniciarServidor = async () => {
-  const response = await fetch(`${URL}control/start?server=${SERVER_ID}`, {
+  const response = await fetch(`${BACKEND_HOSTING_URL}/control/start?server=${SERVER_ID}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ export const iniciarServidor = async () => {
 };
 
 export const detenerServidor = async () => {
-  const response = await fetch(`${URL}control/stop?server=${SERVER_ID}`, {
+  const response = await fetch(`${BACKEND_HOSTING_URL}/control/stop?server=${SERVER_ID}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

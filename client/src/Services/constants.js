@@ -1,0 +1,1 @@
+export const BACKEND_HOSTING_URL = process.env.REACT_APP_API_URL

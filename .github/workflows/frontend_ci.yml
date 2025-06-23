@@ -33,5 +33,7 @@ jobs:
       run: npm test -- --watchAll=false
 
     - name: Compilar app
+      env:
+        CI: false
       working-directory: ./client
       run: npm run build

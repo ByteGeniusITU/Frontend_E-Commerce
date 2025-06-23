@@ -1,6 +1,7 @@
 //import logo from './logo.svg';
 //import './App.css';
 import Main from "./main";
+import Panel from "./panelComponents/Panel"; 
 import { BrowserRouter, Routes, Route } from "react-router";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main/>} />
+        <Route path="/panel/:id" element={<Panel/>} />
       </Routes>
     </BrowserRouter>
   );

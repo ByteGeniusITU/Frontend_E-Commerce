@@ -30,6 +30,8 @@ jobs:
 
       - name: Build the application
         working-directory: ./client
+        env:
+          CI: false
         run: npm run build
 
       - name: Upload build on S3

@@ -1,0 +1,17 @@
+.custom-box {
+  width: 350px;
+  min-height: 120px;
+  margin: 0 auto;
+  background: #181a1b;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  padding: 24px;
+  transition: 
+    box-shadow 0.3s cubic-bezier(.25,.8,.25,1),
+    transform 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.custom-box:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transform: scale(1.04);
+}

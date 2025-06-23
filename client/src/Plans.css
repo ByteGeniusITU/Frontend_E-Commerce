@@ -1,0 +1,254 @@
+:root {
+    --primary: #0f3c5a;
+    --primary-light: #1a5c87;
+    --accent: #4CAF50;
+    --accent-hover: #388E3C;
+    --popular-badge: #d9534f;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.currency-selector {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: inline-flex;
+    margin-bottom: 1.5rem;
+}
+
+.currency-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    font-weight: 500;
+}
+
+.currency-btn.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.billing-options {
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.billing-option {
+    padding: 0.75rem 1.5rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.billing-option.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.billing-option:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.billing-option:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+.plan-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    height: 100%;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+}
+
+.plan-card.popular {
+    background-color: var(--primary);
+    color: white;
+}
+
+.plan-card.popular .ram-size {
+    color: white;
+}
+
+.plan-card.popular .btn-buy {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.plan-card.popular .btn-buy:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.popular-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--popular-badge);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.ram-size {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.ram-label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.plan-description {
+    margin-bottom: 1.5rem;
+    min-height: 60px;
+}
+
+.price-first {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.price-recurring {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.btn-buy {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: 500;
+}
+
+.btn-buy:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.show-more {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.show-more .btn {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    padding: 0.5rem 2rem;
+}
+
+.cpu-selector {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.cpu-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.cpu-card:hover {
+    transform: translateY(-5px);
+}
+
+.cpu-card.selected {
+    border: 2px solid var(--accent);
+}
+
+.cpu-size {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.cpu-label {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.cpu-price {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.summary-section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.summary-title {
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.guide-link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.guide-link:hover {
+    text-decoration: underline;
+}

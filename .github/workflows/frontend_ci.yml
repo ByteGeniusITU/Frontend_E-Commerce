@@ -1,0 +1,39 @@
+name: React CI
+
+on:
+  push:
+    branches: [main, staging, production]
+  pull_request:
+    branches: [main, staging, production]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Usar Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: client/package-lock.json
+
+    - name: Instalar dependencias
+      working-directory: ./client
+      run: npm ci
+
+    - name: Correr tests
+      working-directory: ./client
+      run: npm test -- --watchAll=false
+
+    - name: Compilar app
+      env:
+        CI: false
+      working-directory: ./client
+      run: npm run build

@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './Plans.css';
+import axios from 'axios';
+
+const BACKEND_HOSTING_URL = ``;
 
 const Plans = () => {
     const navigate = useNavigate();
@@ -23,12 +26,13 @@ const Plans = () => {
     const [loadingRam, setLoadingRam] = useState(true);
     const [loadingCpu, setLoadingCpu] = useState(true);
 
+    const [serverName, setServerName] = useState('');
+
     // Obtener las opciones de RAM del endpoint
     useEffect(() => {
         const fetchRamOptions = async () => {
             try {
                 setLoadingRam(true);
-                // Remplazar por uri de la API final
                 const response = await fetch('https://api.example.com/ram-options');
                 const data = await response.json();
 
@@ -64,7 +68,6 @@ const Plans = () => {
         const fetchCpuOptions = async () => {
             try {
                 setLoadingCpu(true);
-                // Remplazar por uri de la API final
                 const response = await fetch('https://api.example.com/cpu-options');
                 const data = await response.json();
 
@@ -105,6 +108,29 @@ const Plans = () => {
             default: return gb * 2.5;
         }
     };
+
+    const handleInput = (e) => {
+        setServerName(s => e.target.value) 
+    }
+
+    const handleRequest = (e) => {
+        if(!serverName) return alert("Debe de ingresar un nombre del servidor")
+
+        let cpu = console.log(selectedCpuPlan.split("-")[1])
+        let ram = console.log(selectedRamPlan.split("-")[1].substring(0,1))
+
+        axios.post(`${BACKEND_HOSTING_URL}/server`, {
+            id: serverName,
+            cpu: Number(cpu),
+            ram: Number(ram)
+        }).then(response => {
+            console.log(response.data)
+            navigate(`/dashboard/${serverName}`)
+        }).catch(error => {
+            console.log(error)
+            alert("Ocurrió un error al crear el servidor")
+        })
+    }
 
     // Ayuda para calcular precio por CPU
     const calculateCpuPrice = (cores) => {
@@ -289,6 +315,11 @@ const Plans = () => {
                             <span>${selectedCpuPrice.toFixed(2)}</span>
                         </div>
 
+                        <div className="summary-item">
+                            <span>Nombre del Servidor</span>
+                            <input id='name'type="text" placeholder="Ingrese un nombre..." onChange={handleInput} value={serverName}></input>
+                        </div>
+
                         <div className="summary-total">
                             <span>Total Mensual:</span>
                             <span>${totalPrice.toFixed(2)}</span>
@@ -297,15 +328,7 @@ const Plans = () => {
                         <button 
                             className="btn btn-success btn-buy"
                             disabled={!selectedRamPlan || !selectedCpuPlan}
-                            onClick={() => navigate('/checkout', { 
-                                state: { 
-                                    ramPlan: selectedRamPlan, 
-                                    cpuPlan: selectedCpuPlan, 
-                                    totalPrice: totalPrice,
-                                    currency: selectedCurrency,
-                                    billing: selectedBilling
-                                } 
-                            })}
+                            onClick={handleRequest}
                         >Contratar Ahora</button>
                     </>
                 )}

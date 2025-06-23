@@ -1,0 +1,81 @@
+.panel-wrapper {
+  background: none;
+}
+
+/* Tarjeta personalizada */
+.custom-card {
+  background-color: #23272b;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+}
+
+/* Título */
+.panel-wrapper .card-title {
+  color: #ffc107;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Lista */
+.panel-wrapper .list-group-item {
+  background-color: #23272b;
+  color: #fff;
+  border: none;
+  border-bottom: 1px solid #343a40;
+}
+
+.panel-wrapper .list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Botones */
+.btn-custom-success,
+.btn-custom-danger {
+  font-weight: 600;
+  border-radius: 8px;
+  min-width: 90px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-custom-success {
+  background-color: #28a745;
+  border: none;
+}
+.btn-custom-success:hover,
+.btn-custom-success:focus {
+  background-color: #218838;
+}
+
+.btn-custom-danger {
+  background-color: #dc3545;
+  border: none;
+}
+.btn-custom-danger:hover,
+.btn-custom-danger:focus {
+  background-color: #b52a37;
+}
+
+/* Barra de progreso */
+.custom-progress {
+  background-color: #343a40;
+  border-radius: 8px;
+  height: 8px;
+}
+
+/* Última acción */
+.panel-wrapper .text-muted {
+  color: #adb5bd !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .custom-card {
+    padding: 0.5rem;
+  }
+
+  .panel-wrapper .card-title {
+    font-size: 1.2rem;
+  }
+}

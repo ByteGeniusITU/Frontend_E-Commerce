@@ -8,6 +8,7 @@ on:
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
+    environment: ${{ contains(github.ref_name, 'production') && 'production' || 'staging' }}
     steps:
     - uses: actions/checkout@v4
 
@@ -25,6 +26,10 @@ jobs:
         tags: |
             type=sha
             type=ref,event=tag
+
+    - name: Environment variables injection
+      run: |
+          echo -e 'REACT_APP_API_URL=${{ secrets.API_URL }}\nREACT_APP_BACKEND_ECOMMERCE_URL=${{ secrets.BACKEND_ECOMMERCE_URL }}' > ./client/.env.production
 
     - uses: docker/build-push-action@v6.18.0
       name: Build and push

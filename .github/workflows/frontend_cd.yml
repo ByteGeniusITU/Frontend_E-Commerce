@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,6 +19,10 @@ jobs:
           node-version: 18
           cache: npm
           cache-dependency-path: client/package-lock.json
+      
+      - name: Environment variables injection
+        run: |
+          echo -e 'REACT_APP_API_URL=${{ secrets.API_URL }}\nREACT_APP_BACKEND_ECOMMERCE_URL=${{ secrets.BACKEND_ECOMMERCE_URL }}' > ./client/.env.production
 
       - name: Install dependencies
         working-directory: ./client

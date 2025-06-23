@@ -21,6 +21,8 @@ function Panel() {
           setCPU(s => response.data.cpu)
           setRAM(s => Number(response.data.ram.toPrecision(4)))
           setServerStatus('En ejecución');
+        }).catch(error => {
+          console.log(error)
         })
     }, 5000)
 

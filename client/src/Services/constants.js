@@ -1,1 +1,2 @@
 export const BACKEND_HOSTING_URL = process.env.REACT_APP_API_URL
+export const BACKEND_ECOMMERCE_URL = process.env.REACT_APP_BACK_ECOMMERCE_URL

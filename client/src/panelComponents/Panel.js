@@ -1,16 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ListGroup, Button, Badge, ProgressBar } from 'react-bootstrap';
-import { iniciarServidor, detenerServidor } from '../Services/ServidorService';
+import { iniciarServidor, detenerServidor, statusServidor } from '../Services/ServidorService';
 import './panel.css';
 import { useParams } from 'react-router';
 
 function Panel() {
   const {id} = useParams();
-  console.log(id);
   const [serverStatus, setServerStatus] = useState('Detenido');
   const [loading, setLoading] = useState(false);
   const [remainingTime, setRemainingTime] = useState(3600);
+  const [cpu, setCPU] = useState(0)
+  const [ram, setRAM] = useState(0)
+
   const intervalRef = useRef();
+
+  useEffect(() => {
+    const intervalStatus = setInterval(() => {
+      statusServidor(id)
+        .then(response => {
+          setCPU(s => response.data.cpu)
+          setRAM(s => Number(response.data.ram.toPrecision(4)))
+          setServerStatus('En ejecución');
+        })
+    }, 5000)
+
+    return () => clearInterval(intervalStatus);
+  }, [serverStatus]);
 
   useEffect(() => {
     if (serverStatus === 'En ejecución') {
@@ -25,29 +40,31 @@ function Panel() {
 
 const stopServer = async () => {
   setLoading(true);
-  try {
-    const response = await detenerServidor();
-    if (response.ok) setServerStatus('Detenido');
-    else console.error(await response.text());
-  } catch (e) {
-    console.error('Error al detener:', e);
-  } finally {
-    setLoading(false);
-  }
+
+  detenerServidor(id)
+    .then(response => {
+      console.log(response)
+      setServerStatus('Detenido');
+    })
+    .catch(e => {
+      console.error('Error al iniciar:', e);
+    })
+    .finally(() => setLoading(false))
 };
 
 
   const startServer = async () => {
   setLoading(true);
-  try {
-    const response = await iniciarServidor();
-    if (response.ok) setServerStatus('En ejecución');
-    else console.error(await response.text());
-  } catch (e) {
-    console.error('Error al iniciar:', e);
-  } finally {
-    setLoading(false);
-  }
+
+  iniciarServidor(id)
+    .then(response => {
+      console.log(response)
+      setServerStatus('En ejecución');
+    })
+    .catch(e => {
+      console.error('Error al iniciar:', e);
+    })
+    .finally(() => setLoading(false))
 };
 
 
@@ -98,6 +115,12 @@ const stopServer = async () => {
                 className="mt-2 custom-progress"
                 variant={remainingTime > 600 ? 'success' : 'danger'}
               />
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Uso de CPU: <span className="text-muted">{cpu}%</span>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              Uso de RAM: <span className="text-muted">{ram} MB</span>
             </ListGroup.Item>
             <ListGroup.Item>
               Última acción: <span className="text-muted">{new Date().toLocaleString()}</span>

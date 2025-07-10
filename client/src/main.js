@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router";
 import Navbar from "./maincomponentes/Navbar";
 import Box from "./maincomponentes/Box";
+import LoginButton from "./maincomponentes/LoginButton";
+import LogoutButton from "./maincomponentes/LogoutButton";
+import Profile from "./maincomponentes/Profile";
+import { useAuth0 } from "@auth0/auth0-react";
 import bloqueComando from "./assets/Bloque_de_comandos_condicional_de_impulso.gif";
 import ReadStone from "./assets/redstone.png";
 
 const Main = () => {
     const navigate = useNavigate();
+    const { isAuthenticated } = useAuth0();
 
     return (
         <div style={{ minHeight: "100vh", backgroundColor: "#23272b", color: "#fff" }}>
@@ -13,6 +18,11 @@ const Main = () => {
             <h1 className="text-center">
                 Bienvenido a la página principal
             </h1>
+            {isAuthenticated && <Profile />}
+            <div className="text-center mb-4">
+                {!isAuthenticated && <LoginButton />}
+                {isAuthenticated && <LogoutButton />}
+            </div>
             <div className="container mt-5">
                 <div className="row align-items-center">
                     <div className="col-md-6">

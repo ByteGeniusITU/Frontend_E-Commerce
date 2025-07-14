@@ -12,6 +12,14 @@ const Main = () => {
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth0();
 
+    const handlePlansClick = () => {
+        if (isAuthenticated) {
+            navigate("/plans");
+        } else {
+            alert("Para acceder a los planes debe iniciar sesión.");
+        }
+    };
+
     return (
         <div style={{ minHeight: "100vh", backgroundColor: "#23272b", color: "#fff" }}>
             <Navbar />
@@ -45,16 +53,19 @@ const Main = () => {
             </div>
             <div className="text-center mt-5">
                 <Box className="mb-4">
-                    <button onClick={() => { navigate("/plans") }} style={{all: "unset", cursor: "pointer", width: "100%"}}>
-                    <h2>MINECRAFT</h2>
-                    <img 
-                        src={bloqueComando}
-                        alt="Bloque de comandos"
-                        style={{ width: "90px", height: "90px", margin: "16px auto", display: "block" }}
-                    />
-                    <p>
-                        El servidor de supervivencia que necesitas para jugar con tus amigos.
-                    </p>
+                    <button
+                        onClick={handlePlansClick}
+                        style={{all: "unset", cursor: "pointer", width: "100%"}}
+                    >
+                        <h2>MINECRAFT</h2>
+                        <img 
+                            src={bloqueComando}
+                            alt="Bloque de comandos"
+                            style={{ width: "90px", height: "90px", margin: "16px auto", display: "block" }}
+                        />
+                        <p>
+                            El servidor de supervivencia que necesitas para jugar con tus amigos.
+                        </p>
                     </button>
                 </Box>
             </div>

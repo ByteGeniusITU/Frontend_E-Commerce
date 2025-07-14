@@ -10,13 +10,13 @@ import ReadStone from "./assets/redstone.png";
 
 const Main = () => {
     const navigate = useNavigate();
-    const { isAuthenticated } = useAuth0();
+    const { isAuthenticated, loginWithRedirect } = useAuth0();
 
     const handlePlansClick = () => {
         if (isAuthenticated) {
-            navigate("/plans");
+            navigate("/plans"); // Si el usuario está autenticado, redirige a la página de planes
         } else {
-            alert("Para acceder a los planes debe iniciar sesión.");
+            loginWithRedirect(); // Redirige al login
         }
     };
 
